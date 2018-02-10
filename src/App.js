@@ -24,8 +24,22 @@ class BooksApp extends React.Component {
         })
     }
 
+    updateBookShelf=(book, shelf)=>{
+      const action = {
+        title: book.title,
+        shelf: book.shelf
+      }
+   
+      //TODO:Need to find a cleaner of doing the filtering and appending below
+      book.shelf = shelf;
+      this.setState((state)=>({
+        books: state.books.filter((bookItem)=> bookItem.title !== book.title).concat([book])
+      }))
+
+      BooksAPI.update(book, shelf);
+    }
+
   render() {
-    
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -35,7 +49,7 @@ class BooksApp extends React.Component {
              <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
-            <BookList books={this.state.books}/>
+            <BookList books={this.state.books} onUpdateBookShelf={this.updateBookShelf}/>
             <div className="open-search">
               <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
             </div>

@@ -9,7 +9,7 @@ function ListItem(props) {
                 <div className="book-top">
                 <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${backgroundImage})` }}></div>
                 <div className="book-shelf-changer">
-                    <select>
+                    <select value={props.shelf} onChange={(event) => {props.onUpdateBookShelf(props.value, event.target.value)}}>
                     <option value="none" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
@@ -26,9 +26,9 @@ function ListItem(props) {
 
 function BookListItems(props) {
   const books = props.books;
-  const listItems = books.filter((book)=>book.shelf===`${props.filter}`).map((book) =>
+  const listItems = books.filter((b)=>b.shelf===`${props.filter}`).map((book) =>
     <ListItem key={book.title.toString()}
-              value={book} />
+              value={book} onUpdateBookShelf={props.onUpdateBookShelf} shelf={props.filter}/> 
   );
   return (
     <ol className="books-grid">
@@ -44,15 +44,15 @@ class BookList extends Component{
             <div className="bookshelf">
                 <h2 className="bookshelf-title">Currently Reading</h2>
                  <div className="bookshelf-books">
-                    <BookListItems books={books} filter='currentlyReading'/>
+                    <BookListItems books={books} filter='currentlyReading' onUpdateBookShelf={this.props.onUpdateBookShelf}/>
                  </div>
                 <h2 className="bookshelf-title">Want to Read</h2>
                  <div className="bookshelf-books">
-                    <BookListItems books={books} filter='wantToRead'/>
+                    <BookListItems books={books} filter='wantToRead' onUpdateBookShelf={this.props.onUpdateBookShelf}/>
                  </div>
                 <h2 className="bookshelf-title">Read</h2>
                  <div className="bookshelf-books">
-                    <BookListItems books={books} filter='read'/>
+                    <BookListItems books={books} filter='read' onUpdateBookShelf={this.props.onUpdateBookShelf}/>
                  </div>
             </div>
         )
