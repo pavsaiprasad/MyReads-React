@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 
-function ListItem(props) {
+function ListItem(props){
   const backgroundImage = props.value.imageLinks.thumbnail;
   const bookTitle = props.value.title;
   const bookAuthors = props.value.authors;
@@ -25,7 +24,7 @@ function ListItem(props) {
         </li>;
 }
 
-function BookListItems(props) {
+ function BooksFullList(props) {
   const books = props.books;
   const listItems = books.filter((b)=>b.shelf===`${props.filter}`).map((book) =>
     <ListItem key={book.title.toString()}
@@ -38,34 +37,12 @@ function BookListItems(props) {
   );
 }
 
-class BookList extends Component{
+class BooksGrid extends Component{
     render(){
-        const books = this.props.books;
         return(
-             <div className="list-books">
-                <div className="list-books-title">
-                <h1>MyReads</h1>
-                </div>
-                <div className="bookshelf">
-                    <h2 className="bookshelf-title">Currently Reading</h2>
-                    <div className="bookshelf-books">
-                        <BookListItems books={books} filter='currentlyReading' onUpdateBookShelf={this.props.onUpdateBookShelf}/>
-                    </div>
-                    <h2 className="bookshelf-title">Want to Read</h2>
-                    <div className="bookshelf-books">
-                        <BookListItems books={books} filter='wantToRead' onUpdateBookShelf={this.props.onUpdateBookShelf}/>
-                    </div>
-                    <h2 className="bookshelf-title">Read</h2>
-                    <div className="bookshelf-books">
-                        <BookListItems books={books} filter='read' onUpdateBookShelf={this.props.onUpdateBookShelf}/>
-                    </div>
-                </div>
-                <div className="open-search">
-                    <Link to="/add">Add a book</Link>
-                </div>
-            </div>
+            <BooksFullList books={this.props.books} filter={this.props.filter} onUpdateBookShelf={this.props.onUpdateBookShelf}/>
         )
     }
 }
 
-export default BookList;
+export default BooksGrid;
