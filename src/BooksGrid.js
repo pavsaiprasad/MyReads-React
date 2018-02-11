@@ -10,7 +10,7 @@ function ListItem(props){
                 <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${backgroundImage})` }}></div>
                 <div className="book-shelf-changer">
                     <select value={props.shelf} onChange={(event) => {props.onUpdateBookShelf(props.value, event.target.value)}}>
-                    <option value="none" disabled>Move to...</option>
+                    <option value="-1" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
@@ -26,10 +26,11 @@ function ListItem(props){
 
  function BooksFullList(props) {
   const books = props.books;
-  const listItems = books.filter((b)=>b.shelf===`${props.filter}`).map((book) =>
-    <ListItem key={book.title.toString()}
+  const filteredBooks = props.filter=='none'? books : books.filter((b)=>b.shelf===`${props.filter}`)
+  const listItems = filteredBooks.length>0 ? filteredBooks.map((book) =>
+    <ListItem key={book.id.toString()}
               value={book} onUpdateBookShelf={props.onUpdateBookShelf} shelf={props.filter}/> 
-  );
+  ):[];
   return (
     <ol className="books-grid">
       {listItems}

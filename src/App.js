@@ -8,7 +8,8 @@ import * as BooksAPI from './BooksAPI'
 
 class BooksApp extends React.Component {
   state = {
-    books:[]
+    books:[],
+    searchResults:[]
   }
     
     componentDidMount(){
@@ -32,11 +33,21 @@ class BooksApp extends React.Component {
       BooksAPI.update(book, shelf);
     }
 
+     searchBooks = (searchTerm)=>{
+       alert(searchTerm)
+        BooksAPI.search(searchTerm).then((results)=>{
+            this.setState({
+                searchResults: results
+            })
+        })
+    }
+
   render() {
+    console.log(this.state.searchResults)
     return (
       <div className="app">
         <Route exact path='/add' render={()=>(
-              <SearchBooks/> 
+              <SearchBooks onUpdateBookShelf={this.updateBookShelf}/> 
           )}/>
         <Route exact path='/' render={()=>(
             <BookShelves books={this.state.books} onUpdateBookShelf={this.updateBookShelf}/>
