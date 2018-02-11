@@ -26,11 +26,11 @@ function ListItem(props){
 
  function BooksFullList(props) {
   const books = props.books;
-  const filteredBooks = props.filter=='none'? books : books.filter((b)=>b.shelf===`${props.filter}`)
-  const listItems = filteredBooks.length>0 ? filteredBooks.map((book) =>
-    <ListItem key={book.id.toString()}
-              value={book} onUpdateBookShelf={props.onUpdateBookShelf} shelf={props.filter}/> 
-  ):[];
+  const listItems= books.length>0 ? books.map((book) => 
+       <ListItem key={book.id.toString()}
+  value={book} onUpdateBookShelf={props.onUpdateBookShelf} shelf={book.shelf}/>
+  ) : [];
+    
   return (
     <ol className="books-grid">
       {listItems}
@@ -41,7 +41,7 @@ function ListItem(props){
 class BooksGrid extends Component{
     render(){
         return(
-            <BooksFullList books={this.props.books} filter={this.props.filter} onUpdateBookShelf={this.props.onUpdateBookShelf}/>
+            <BooksFullList books={this.props.books} onUpdateBookShelf={this.props.onUpdateBookShelf}/>
         )
     }
 }

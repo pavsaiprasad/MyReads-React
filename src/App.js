@@ -19,11 +19,6 @@ class BooksApp extends React.Component {
     }
 
     updateBookShelf=(book, shelf)=>{
-      const action = {
-        title: book.title,
-        shelf: book.shelf
-      }
-   
       //TODO:Need to find a cleaner of doing the filtering and appending below
       book.shelf = shelf;
       this.setState((state)=>({
@@ -43,11 +38,10 @@ class BooksApp extends React.Component {
     }
 
   render() {
-    console.log(this.state.searchResults)
     return (
       <div className="app">
         <Route exact path='/add' render={()=>(
-              <SearchBooks onUpdateBookShelf={this.updateBookShelf}/> 
+              <SearchBooks books={this.state.books}  onUpdateBookShelf={this.updateBookShelf}/> 
           )}/>
         <Route exact path='/' render={()=>(
             <BookShelves books={this.state.books} onUpdateBookShelf={this.updateBookShelf}/>

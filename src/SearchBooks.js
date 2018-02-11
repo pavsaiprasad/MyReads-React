@@ -8,9 +8,19 @@ class SearchBooks extends Component{
         searchResults:[]
     }
     searchBooks = (searchTerm)=>{
+        if (searchTerm.length < 3)
+         return;
         BooksAPI.search(searchTerm).then((results)=>{
+            const updatedResults = results.map((result)=>{
+                const existingBook = this.props.books.filter((book)=> book.id===result.id)
+                if(existingBook.length===1){
+                    result.shelf = existingBook[0].shelf;
+                }
+                return result;
+            })
+            
             this.setState({
-                searchResults: results
+                searchResults: updatedResults
             })
         })
     }
@@ -34,7 +44,7 @@ class SearchBooks extends Component{
             </div>
             <div className="search-books-results">
                 {this.state.searchResults && (
-                    <BooksGrid books={this.state.searchResults} filter='none' onUpdateBookShelf={this.props.onUpdateBookShelf}/>
+                    <BooksGrid books={this.state.searchResults} onUpdateBookShelf={this.props.onUpdateBookShelf}/>
                 )}
             </div>
           </div>
