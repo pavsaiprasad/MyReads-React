@@ -13,8 +13,6 @@ class SearchBooks extends Component{
         searchResults:[]
     }
     searchBooks = (searchTerm)=>{
-        if (searchTerm.length < 3)
-         return;
         BooksAPI.search(searchTerm).then((results)=>{
             const updatedResults = results.map((result)=>{
                 const existingBook = this.props.books.filter((book)=> book.id===result.id)
