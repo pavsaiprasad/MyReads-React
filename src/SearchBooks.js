@@ -13,18 +13,25 @@ class SearchBooks extends Component{
         searchResults:[]
     }
     searchBooks = (searchTerm)=>{
-        BooksAPI.search(searchTerm).then((results)=>{
-            const updatedResults = results.map((result)=>{
-                const existingBook = this.props.books.filter((book)=> book.id===result.id)
-                if(existingBook.length===1){
-                    result.shelf = existingBook[0].shelf;
+        BooksAPI.search(searchTerm).then((booksInSearchResults)=>{
+            let updatedResultsWithMatchingShelves = [];
+            if(booksInSearchResults && booksInSearchResults.length>0){
+                updatedResultsWithMatchingShelves = booksInSearchResults.map((bookInSearchResult)=>{
+                const matchingBookAlreadyOnShelf = this.props.books.filter((book)=> book.id===bookInSearchResult.id)
+                if(matchingBookAlreadyOnShelf.length===1){
+                    bookInSearchResult.shelf = matchingBookAlreadyOnShelf[0].shelf;
                 }
-                return result;
-            })
+                else{
+                    bookInSearchResult.shelf = 'none'
+                }
+                return bookInSearchResult;
+                 })
             
-            this.setState({
-                searchResults: updatedResults
-            })
+                this.setState({
+                    searchResults: updatedResultsWithMatchingShelves
+                })
+            }
+            
         })
     }
     render(){

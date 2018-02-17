@@ -29,7 +29,6 @@ class BooksApp extends React.Component {
     }
 
      searchBooks = (searchTerm)=>{
-       alert(searchTerm)
         BooksAPI.search(searchTerm).then((results)=>{
             this.setState({
                 searchResults: results

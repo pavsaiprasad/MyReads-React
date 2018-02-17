@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
 function ListItem(props){
-  const backgroundImage = props.value.imageLinks.thumbnail;
+  const backgroundImage = props.value.imageLinks? props.value.imageLinks.thumbnail : '';
   const bookTitle = props.value.title;
   const bookAuthors = props.value.authors;
   return <li>
@@ -26,7 +26,8 @@ function ListItem(props){
 
  function BooksFullList(props) {
   const books = props.books;
-  const listItems= books.length>0 ? books.map((book) => 
+  console.log(books)
+  const listItems= (books && books.length>0) ? books.map((book) => 
        <ListItem key={book.id.toString()}
   value={book} onUpdateBookShelf={props.onUpdateBookShelf} shelf={book.shelf}/>
   ) : [];

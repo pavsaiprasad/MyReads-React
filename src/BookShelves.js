@@ -20,14 +20,14 @@ class BookShelves extends Component{
                 </div>
                 <div className="bookshelf">
                     <h2 className="bookshelf-title">Currently Reading</h2>
-                    <div className="bookshelf-books">
+                    <div className="bookshelf-books currentlyreading">
                         <BooksGrid books={this.getBooksBasedOnShelf('currentlyReading')} onUpdateBookShelf={this.props.onUpdateBookShelf}/>
                     </div>
-                    <h2 className="bookshelf-title">Want to Read</h2>
+                    <h2 className="bookshelf-title wanttoread">Want to Read</h2>
                     <div className="bookshelf-books">
                         <BooksGrid books={this.getBooksBasedOnShelf('wantToRead')} onUpdateBookShelf={this.props.onUpdateBookShelf}/>
                     </div>
-                    <h2 className="bookshelf-title">Read</h2>
+                    <h2 className="bookshelf-title read">Read</h2>
                     <div className="bookshelf-books">
                         <BooksGrid books={this.getBooksBasedOnShelf('read')} onUpdateBookShelf={this.props.onUpdateBookShelf}/>
                     </div>
