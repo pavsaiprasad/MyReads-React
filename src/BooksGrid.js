@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 
 function ListItem(props){
-  const backgroundImage = props.value.imageLinks? props.value.imageLinks.thumbnail : '';
-  const bookTitle = props.value.title;
-  const bookAuthors = props.value.authors;
-  return <li>
+    const backgroundImage = props.value.imageLinks? props.value.imageLinks.thumbnail : '';
+    const bookTitle = props.value.title;
+    const bookAuthors = props.value.authors;
+    return <li>
             <div className="book">
                 <div className="book-top">
                 <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${backgroundImage})` }}></div>
@@ -24,19 +24,19 @@ function ListItem(props){
         </li>;
 }
 
- function BooksFullList(props) {
-  const books = props.books;
-  console.log(books)
-  const listItems= (books && books.length>0) ? books.map((book) => 
-       <ListItem key={book.id.toString()}
-  value={book} onUpdateBookShelf={props.onUpdateBookShelf} shelf={book.shelf}/>
-  ) : [];
-    
-  return (
+function BooksFullList(props) {
+    const books = props.books;
+    console.log(books)
+    const listItems= (books && books.length>0) ? books.map((book) => 
+        <ListItem key={book.id.toString()}
+    value={book} onUpdateBookShelf={props.onUpdateBookShelf} shelf={book.shelf}/>
+    ) : [];
+
+    return (
     <ol className="books-grid">
-      {listItems}
+        {listItems}
     </ol>
-  );
+    );
 }
 
 class BooksGrid extends Component{
