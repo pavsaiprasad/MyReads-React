@@ -34,7 +34,6 @@ function ListItem(props){
  */
 function BooksFullList(props) {
     const books = props.books;
-    console.log(books)
     const listItems= (books && books.length>0) ? books.map((book) => 
         <ListItem key={book.id.toString()}
     value={book} onUpdateBookShelf={props.onUpdateBookShelf} shelf={book.shelf}/>
