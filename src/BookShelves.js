@@ -9,6 +9,10 @@ class BookShelves extends Component{
         onUpdateBookShelf: PropTypes.func.isRequired
     }
 
+    /**
+     * @description Filters books based on shelf
+     * @param {string} shelf - shelf to filter by
+     */
     getBooksBasedOnShelf=(shelf)=>{
         const books = this.props.books;
         return books.filter((book)=> book.shelf === shelf);

@@ -14,6 +14,10 @@ class SearchBooks extends Component{
         searchResults:[]
     }
 
+    /**
+     * @description Searches for books and updates shelves if search results have already been assigned to a shelf
+     * @param {string} searchTerm - the query used for search for books
+     */
     searchBooks = (searchTerm)=>{
         BooksAPI.search(searchTerm).then((booksInSearchResults)=>{
             let updatedResultsWithMatchingShelves = [];

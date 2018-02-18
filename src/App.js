@@ -18,6 +18,11 @@ class BooksApp extends React.Component {
       })
   }
 
+  /**
+  * @description updates book shelf
+  * @param {object} book - The book whose shelf needs to be updated
+  * @param {string} shelf - The shelf to be assigned to the book
+  */
   updateBookShelf=(book, shelf)=>{
     //TODO:Need to find a cleaner of doing the filtering and appending below
     book.shelf = shelf;
@@ -26,14 +31,6 @@ class BooksApp extends React.Component {
     }))
 
     BooksAPI.update(book, shelf);
-  }
-
-  searchBooks = (searchTerm)=>{
-    BooksAPI.search(searchTerm).then((results)=>{
-        this.setState({
-            searchResults: results
-        })
-    })
   }
 
   render() {

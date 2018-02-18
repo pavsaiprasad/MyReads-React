@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
 
+/**
+ * @description Builds book list items
+ * @param {object} props - book props
+ */
 function ListItem(props){
     const backgroundImage = props.value.imageLinks? props.value.imageLinks.thumbnail : '';
     const bookTitle = props.value.title;
@@ -24,6 +28,10 @@ function ListItem(props){
         </li>;
 }
 
+/**
+ * @description Builds an ordered list of books
+ * @param {object} props - book props
+ */
 function BooksFullList(props) {
     const books = props.books;
     console.log(books)
