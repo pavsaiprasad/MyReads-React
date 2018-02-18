@@ -19,6 +19,13 @@ class SearchBooks extends Component{
      * @param {string} searchTerm - the query used for search for books
      */
     searchBooks = (searchTerm)=>{
+        if (searchTerm.length === 0){
+            this.setState({
+                searchResults: []
+            })
+            return;
+        }
+
         BooksAPI.search(searchTerm).then((booksInSearchResults)=>{
             let updatedResultsWithMatchingShelves = [];
             if(booksInSearchResults && booksInSearchResults.length>0){
