@@ -21,15 +21,19 @@ Optionally install [yarn](https://yarnpkg.com/en/docs/install) as well
 ```
 $ npm install
 $ yarn install
+```
 
 ## Run the app:
 ```
 $ npm start
 $ yarn start
+```
 
-Test:
+## Test:
+```
 $ npm test
 $ yarn test
+```
 
 The App was written using React for the frontend and with a Backend Api for fetching Books. 
 
