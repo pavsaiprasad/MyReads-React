@@ -12,7 +12,24 @@ Each book has a control that lets you select the shelf for that book. When you s
 
 Sort out your book shelves already!
 
-## Technical details
+# Get started
+## Prerequisites
+You need to install [node.js v8.9.4](https://nodejs.org/dist/v8.9.4/)     
+Optionally install [yarn](https://yarnpkg.com/en/docs/install) as well
+
+## Install dependencies:
+```
+$ npm install
+$ yarn install
+
+## Run the app:
+```
+$ npm start
+$ yarn start
+
+Test:
+$ npm test
+$ yarn test
 
 The App was written using React for the frontend and with a Backend Api for fetching Books. 
 
