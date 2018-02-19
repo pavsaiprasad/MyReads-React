@@ -1,4 +1,4 @@
-# MyReads Project Functionality
+# MyReads 
 
 A simple app that lets you search, organise and catalog your books into reading lists.
 
@@ -8,9 +8,7 @@ The main page displays a list of "shelves" (i.e. categories), each of which cont
  - Want to Read 
  - Read
 
-Each book has a control that lets you select the shelf for that book. When you select a different shelf, the book moves there. Each book has a control that lets you select the shelf for that book. When you select a different shelf, the book moves there. 
-
-Sort out your book shelves already!
+Each book has a control that lets you select the shelf for that book. When you select a different shelf, the book moves there. The main page also has a link to a search page that allows you to find books to add to your library. The search page has a text input that may be used to find books.  
 
 # Get started
 ## Prerequisites
