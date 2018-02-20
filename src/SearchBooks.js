@@ -21,37 +21,27 @@ class SearchBooks extends Component{
      * @param {string} searchTerm - the query used for search for books
      */
     searchBooks = (searchTerm)=>{
-        if (searchTerm.length === 0){
-            
-            return;
-        }
-
         this.setState({ searchResults: []}, () => {
             if (searchTerm.length === 0){
                 return;
             }
-        })
-
-        BooksAPI.search(searchTerm).then((booksInSearchResults)=>{
-            let updatedResultsWithMatchingShelves = [];
-            if(booksInSearchResults && booksInSearchResults.length>0){
-                updatedResultsWithMatchingShelves = booksInSearchResults.map((bookInSearchResult)=>{
-                const matchingBookAlreadyOnShelf = this.props.books.filter((book)=> book.id===bookInSearchResult.id)
-                if(matchingBookAlreadyOnShelf.length===1){
-                    bookInSearchResult.shelf = matchingBookAlreadyOnShelf[0].shelf;
-                }
-                else{
-                    bookInSearchResult.shelf = 'none'
-                }
-                return bookInSearchResult;
+            BooksAPI.search(searchTerm).then((results)=>{
+                if(results && !results.error){
+                    this.setState({
+                        searchResults: results.map((bookInSearchResult)=>{
+                            const matchingBookAlreadyOnShelf = this.props.books.find((book)=> book.id===bookInSearchResult.id)
+                            
+                            return {
+                                ...bookInSearchResult, 
+                                shelf: matchingBookAlreadyOnShelf ? matchingBookAlreadyOnShelf.shelf: 'none'};
+                        })  
                     })
-            
-                this.setState({
-                    searchResults: updatedResultsWithMatchingShelves
-                })
-            }
+                }
+            })
         })
     }
+
+   
 
     render(){
         return(
