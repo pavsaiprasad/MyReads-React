@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
+import {Debounce} from 'react-throttle'
+
 import * as BooksAPI from './BooksAPI'
 import BooksGrid from './BooksGrid'
 
@@ -20,11 +22,15 @@ class SearchBooks extends Component{
      */
     searchBooks = (searchTerm)=>{
         if (searchTerm.length === 0){
-            this.setState({
-                searchResults: []
-            })
+            
             return;
         }
+
+        this.setState({ searchResults: []}, () => {
+            if (searchTerm.length === 0){
+                return;
+            }
+        })
 
         BooksAPI.search(searchTerm).then((booksInSearchResults)=>{
             let updatedResultsWithMatchingShelves = [];
@@ -61,7 +67,9 @@ class SearchBooks extends Component{
                         However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                         you don't find a specific author or title. Every search is limited by search terms.
                         */}
-                        <input type="text" placeholder="Search by title or author" onChange={(event)=> this.searchBooks(event.target.value)}/>
+                        <Debounce time="500" handler="onChange">
+                            <input type="text" placeholder="Search by title or author" onChange={(event)=> this.searchBooks(event.target.value)}/>
+                        </Debounce>
 
                     </div>
                 </div>
