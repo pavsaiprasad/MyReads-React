@@ -41,8 +41,6 @@ class SearchBooks extends Component{
         })
     }
 
-   
-
     render(){
         return(
             <div className="search-books">

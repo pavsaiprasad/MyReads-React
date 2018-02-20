@@ -23,14 +23,12 @@ class BooksApp extends React.Component {
   * @param {object} book - The book whose shelf needs to be updated
   * @param {string} shelf - The shelf to be assigned to the book
   */
-  updateBookShelf=(book, shelf)=>{
-    //TODO:Need to find a cleaner of doing the filtering and appending below
-    book.shelf = shelf;
-    this.setState((state)=>({
-      books: state.books.filter((bookItem)=> bookItem.title !== book.title).concat([book])
-    }))
-
-    BooksAPI.update(book, shelf);
+  updateBookShelf=(book,shelf)=>{
+    BooksAPI.update(book, shelf).then((result)=>{
+        this.setState((state)=>({
+        books: state.books.filter((bookItem)=> bookItem.id !== book.id).concat({...book, shelf})
+      }))
+    })
   }
 
   render() {
